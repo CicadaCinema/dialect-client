@@ -46,18 +46,30 @@ class _MainLayoutState extends State<MainLayout> {
             onPressed: () {
               showDialogBox(
                   "What's new",
-                  "The layout of the site has been significantly improved.",
+                  "The layout of the site has been revamped!",
                   context);
             },
             child: Text("What's new"),
           ),
         ),
         PopupMenuButton<String>(
-          onSelected: (String value) {
-            print(value + " button pressed");
+          onSelected: (String value) async {
+            switch (value) {
+              case "About":
+                {
+                  await showAboutDialogBox(context);
+                }
+                break;
+
+              default:
+                {
+                  print("Invalid context menu choice.");
+                }
+                break;
+            }
           },
           itemBuilder: (BuildContext context) {
-            return {':D', 'LOLE'}.map(
+            return {"About"}.map(
               (String choice) {
                 return PopupMenuItem<String>(
                   value: choice,
