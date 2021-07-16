@@ -85,7 +85,7 @@ class _MainLayoutState extends State<MainLayout> {
         AdaptiveScaffoldDestination(
             title: 'About', icon: Icons.info_outline, selectedicon: Icons.info),
         AdaptiveScaffoldDestination(
-            title: 'Explore',
+            title: 'Dialect',
             icon: Icons.explore_outlined,
             selectedicon: Icons.explore),
         AdaptiveScaffoldDestination(
