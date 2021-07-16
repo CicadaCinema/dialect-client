@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:ui' as ui;
-import 'dart:html';
 import 'dart:html' as html;
 
 import 'package:http/http.dart' as http;
@@ -37,7 +36,7 @@ class _ExplorePageState extends State<ExplorePage> {
   // Uri.https.(_API_ENDPOINT
   // Uri.http.(_API_ENDPOINT
 
-  final IFrameElement _iframeElement = IFrameElement();
+  final html.IFrameElement _iframeElement = html.IFrameElement();
   late Widget _iframeWidget;
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {
@@ -118,7 +117,7 @@ class _ExplorePageState extends State<ExplorePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Spacer(flex: 4),
+          Spacer(flex: 12),
           SelectableText(
             _displayedText,
             style: TextStyle(
@@ -126,7 +125,7 @@ class _ExplorePageState extends State<ExplorePage> {
               color: _errorMessage ? Colors.red : null,
             ),
           ),
-          Spacer(flex: 1),
+          Spacer(flex: 3),
           Row(
             children: [
               Spacer(flex: 2),
@@ -168,7 +167,7 @@ class _ExplorePageState extends State<ExplorePage> {
               Spacer(flex: 2),
             ],
           ),
-          Spacer(flex: 4),
+          Spacer(flex: 12),
           TextField(
             controller: _controller,
             maxLength: 140,
@@ -180,22 +179,20 @@ class _ExplorePageState extends State<ExplorePage> {
               errorText: _showErrorText ? _errorText : null,
             ),
           ),
-          Spacer(flex: 1),
+          Spacer(flex: 3),
           OutlinedButton(
             onPressed: () {
               html.window.open('/recaptcha.html', 'new tab');
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+              padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 32),
               child: Text(
                 "Verify",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 18),
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-          ),
+          Spacer(flex: 1),
           ElevatedButton(
             onPressed: () {
               setState(
@@ -256,14 +253,14 @@ class _ExplorePageState extends State<ExplorePage> {
               }
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+              padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 32),
               child: Text(
                 "Submit",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 18),
               ),
             ),
           ),
-          Spacer(flex: 2),
+          Spacer(flex: 6),
         ],
       ),
     );

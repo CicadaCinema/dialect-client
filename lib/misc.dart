@@ -81,3 +81,8 @@ Future<void> showAboutDialogBox(BuildContext context) async {
     },
   );
 }
+
+// used for adaptive UI
+bool isDesktop(BuildContext context) {
+  return MediaQuery.of(context).size.width > 640.0;
+}

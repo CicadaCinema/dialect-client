@@ -83,15 +83,15 @@ class _MainLayoutState extends State<MainLayout> {
       currentIndex: _pageIndex,
       destinations: [
         AdaptiveScaffoldDestination(
-            title: 'About', icon: Icons.info_outline, selectedicon: Icons.info),
+            title: 'About', icon: Icons.info_outline, selectedIcon: Icons.info),
         AdaptiveScaffoldDestination(
             title: 'Dialect',
             icon: Icons.explore_outlined,
-            selectedicon: Icons.explore),
+            selectedIcon: Icons.explore),
         AdaptiveScaffoldDestination(
             title: 'Settings',
             icon: Icons.settings_outlined,
-            selectedicon: Icons.settings),
+            selectedIcon: Icons.settings),
       ],
       body: _pageAtIndex(_pageIndex),
       onNavigationIndexChange: (newIndex) {

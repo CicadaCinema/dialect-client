@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-
-bool _isMediumScreen(BuildContext context) {
-  return MediaQuery.of(context).size.width > 640.0;
-}
+import 'misc.dart';
 
 /// See bottomNavigationBarItem or NavigationRailDestination
 class AdaptiveScaffoldDestination {
   final String title;
   final IconData icon;
-  final IconData selectedicon;
+  final IconData selectedIcon;
 
   const AdaptiveScaffoldDestination({
     required this.title,
     required this.icon,
-    required this.selectedicon,
+    required this.selectedIcon,
   });
 }
 
@@ -44,8 +41,8 @@ class AdaptiveScaffold extends StatefulWidget {
 class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
   @override
   Widget build(BuildContext context) {
-    // Show a navigation rail
-    if (_isMediumScreen(context)) {
+    if (isDesktop(context)) {
+      // Show a navigation rail
       return Scaffold(
         appBar: AppBar(
           title: widget.title,
@@ -58,7 +55,7 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                 ...widget.destinations.map(
                   (d) => NavigationRailDestination(
                     icon: Icon(d.icon),
-                    selectedIcon: Icon(d.selectedicon),
+                    selectedIcon: Icon(d.selectedIcon),
                     label: Text(d.title),
                   ),
                 ),
@@ -78,35 +75,28 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
           ],
         ),
       );
-    }
-
-    // Show a bottom app bar
-    return Scaffold(
-      body: widget.body,
-      appBar: AppBar(
-        title: widget.title,
-        actions: widget.actions,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          ...widget.destinations.map(
-            (d) => BottomNavigationBarItem(
-              icon: Icon(d.icon),
-              activeIcon: Icon(d.selectedicon),
-              label: d.title,
+    } else {
+      // Show a bottom app bar
+      return Scaffold(
+        body: widget.body,
+        appBar: AppBar(
+          title: widget.title,
+          actions: widget.actions,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            ...widget.destinations.map(
+              (d) => BottomNavigationBarItem(
+                icon: Icon(d.icon),
+                activeIcon: Icon(d.selectedIcon),
+                label: d.title,
+              ),
             ),
-          ),
-        ],
-        currentIndex: widget.currentIndex,
-        onTap: widget.onNavigationIndexChange,
-      ),
-    );
-  }
-
-  void _destinationTapped(AdaptiveScaffoldDestination destination) {
-    var idx = widget.destinations.indexOf(destination);
-    if (idx != widget.currentIndex) {
-      widget.onNavigationIndexChange(idx);
+          ],
+          currentIndex: widget.currentIndex,
+          onTap: widget.onNavigationIndexChange,
+        ),
+      );
     }
   }
 }
