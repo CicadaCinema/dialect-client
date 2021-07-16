@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'dart:ui' as ui;
 import 'dart:html' as html;
 
 import 'package:http/http.dart' as http;
@@ -31,13 +30,6 @@ class _ExplorePageState extends State<ExplorePage> {
   String _clientCaptcha = "";
   static const _API_ENDPOINT =
       kDebugMode ? "localhost:8080" : "dialect-server.vercel.app";
-
-  // change between:
-  // Uri.https.(_API_ENDPOINT
-  // Uri.http.(_API_ENDPOINT
-
-  final html.IFrameElement _iframeElement = html.IFrameElement();
-  late Widget _iframeWidget;
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {
     if (_canVote) {
@@ -75,31 +67,10 @@ class _ExplorePageState extends State<ExplorePage> {
   void initState() {
     super.initState();
     _controller = TextEditingController();
-    // write cookie
-    //document.cookie = "key=value; max-age=315569260";
-
-    // BEGIN CAPTCHA HELL
-    //_iframeElement.height = '500';
-    //_iframeElement.width = '500';
-    _iframeElement.src = "/recaptcha.html";
-    _iframeElement.style.border = 'none';
-
-    // ignore: undefined_prefixed_name
-    ui.platformViewRegistry.registerViewFactory(
-      'iframeElement',
-      (int viewId) => _iframeElement,
-    );
-
-    _iframeWidget = HtmlElementView(
-      key: UniqueKey(),
-      viewType: 'iframeElement',
-    );
-
     html.window.onMessage.listen((event) {
       // load the captcha response token
       _clientCaptcha = event.data;
     });
-    // END CAPTCHA HELL
   }
 
   @override
@@ -171,9 +142,6 @@ class _ExplorePageState extends State<ExplorePage> {
           TextField(
             controller: _controller,
             maxLength: 140,
-            onSubmitted: (String value) {
-              print('"$value" has length ${value.characters.length}');
-            },
             decoration: InputDecoration(
               labelText: "Enter your note",
               errorText: _showErrorText ? _errorText : null,
