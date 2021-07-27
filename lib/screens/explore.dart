@@ -58,7 +58,7 @@ class _ExplorePageState extends State<ExplorePage> {
   bool _isReplying = false;
   bool _canVote = false;
   String _clientCaptcha = "";
-  static const _API_ENDPOINT = kDebugMode ? "localhost:8080" : "dialect-server.vercel.app";
+  static const _API_ENDPOINT = kDebugMode ? "localhost:8080" : "dialect.vercel.app";
   late DialectServerResponse _serverResponse;
   final List<DialectPost> _allPosts = <DialectPost>[];
 
