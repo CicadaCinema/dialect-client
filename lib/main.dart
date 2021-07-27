@@ -46,7 +46,7 @@ class _MainLayoutState extends State<MainLayout> {
             onPressed: () {
               showDialogBox(
                   "What's new",
-                  "The layout of the site has been revamped!",
+                  "You can now view and reply to threads of posts!",
                   context);
             },
             child: Text("What's new"),
